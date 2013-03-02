@@ -27,22 +27,14 @@ def process_file(file_path):
     jd = json.loads(''.join(lines))
 
     output = ''
-
     for event in jd:
         ugly_datetime = event['created_at']
         dt = datetime.datetime.strptime(ugly_datetime, '%a %b %d %H:%M:%S +0000 %Y')
         event['created_at'] = dt.isoformat()
         one_event = json.dumps(event)
         output = '%s\n%s' % (output, one_event)
-
-#    output = json.dumps(jd, indent=2)
-#    output = output[4:-1]  # Trim away some []s
-#    output = output.replace('\n  ', '\n')  # Storm hates two spaces before {
-
     return output
 
-def correct_date(in_string):
-    return out_string
 
 if __name__ == "__main__":
     print ('====Twitter Cleaner====\n %s\n %s\n %s\n'
