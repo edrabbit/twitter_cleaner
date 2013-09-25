@@ -25,10 +25,14 @@ def process_file(file_path):
     lines[0] = ''  # kill the first line stuff that's not needed
     jd = json.loads(''.join(lines))
 
-    output = json.dumps(jd, indent=2)
-    output = output[4:-1]  # Trim away some []s
-    output = output.replace('\n  ', '\n')  # Storm hates two spaces before {
+    one_line = []
+    for x in jd:
+        one_line.append(json.dumps(x))
+    one_line.reverse()
 
+    output = ''
+    for line in one_line:
+        output = output + line + '\n'
     return output
 
 if __name__ == "__main__":
